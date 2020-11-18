@@ -44,13 +44,7 @@
     ```
   - ...
 >4. Digit Feature Design
-  - xét mảng 2 chiều pixels, nếu khác 0 => nonzero += 1
-    ```
-    for i in range(len(pixels)):
-        for j in range(1, len(pixels[i])):
-            if pixels[i][j] != 0:
-                nonzero += 1
-    ```
+  - em không biết làm câu này ạ.
 >5. Behavioral Cloning
   - tương tự perceptron với chữ số nhưng trả về action thay vì đưa ra bit nhị phân
   - áp dụng công thức: score(s,a)=w∗f(s,a)
