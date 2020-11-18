@@ -58,7 +58,7 @@ class PerceptronClassifier:
             print "Starting iteration ", iteration, "..."
             for i in range(len(trainingData)):
                 "*** YOUR CODE HERE ***"
-                y = util.Counter()  # include key = label and value = score
+                y = util.Counter()
                 for label in self.weights.keys():
                     y[label] = (trainingData[i]) * self.weights[label]
                 arg_max = y.argMax()

@@ -82,8 +82,8 @@ class MiraClassifier:
                         tau = min(
                             c, ((self.weights[predictedLabel] - self.weights[actualLabel]) * f + 1.0) / (2.0 * (f * f)))
                         f.divideAll(1.0 / tau)
-                        self.weights[actualLabel] += f  # @@
-                        self.weights[predictedLabel] -= f  # @@
+                        self.weights[actualLabel] += f 
+                        self.weights[predictedLabel] -= f 
 
             accuracyScore = 0
             predictedValidationLabel = self.classify(validationData)

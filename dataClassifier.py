@@ -81,57 +81,58 @@ def enhancedFeatureExtractorDigit(datum):
 
     "*** YOUR CODE HERE ***"
 
-    breaks = 0
-    pixels = datum.getPixels()  # pixels are values (0, 1, 2)
-    nonzero = 0
-    firstLeft = None
-    aboveCenter = 0
-    for i in range(len(pixels)):  # the all
-        for j in range(1, len(pixels[i])):  # array 2
-            if pixels[i][j] != 0:
-                nonzero += 1
-                if not firstLeft or j < firstLeft:
-                    firstLeft = j
-                if j <= (len(pixels) + 1) / 2:
-                    aboveCenter += 1  # ok
-            if pixels[i][j] != pixels[i][j - 1]:
-                breaks += 1
+    # breaks = 0
+    # pixels = datum.getPixels()  # pixels are values (0, 1, 2)
+    # nonzero = 0
+    # firstLeft = None
+    # aboveCenter = 0
+    # for i in range(len(pixels)):  # the all
+    #     for j in range(1, len(pixels[i])):  # array 2
+    #         if pixels[i][j] != 0:
+    #             nonzero += 1
+    #             if not firstLeft or j < firstLeft:
+    #                 firstLeft = j
+    #             if j <= (len(pixels) + 1) / 2:
+    #                 aboveCenter += 1  # ok
+    #         if pixels[i][j] != pixels[i][j - 1]:
+    #             breaks += 1
 
-    width = len(pixels[0]) - (firstLeft * 2)
-    firstTop = None
-    pastRight = 0
-    for j in range(len(pixels[0])):
-        col = [p[j] for p in pixels]
-        for i in range(1, len(col)):
-            if col[j] != 0:
-                nonzero += 1
-                if not firstTop or i < firstTop:
-                    firstTop = i
-                if i <= (len(pixels[0]) + 1) / 2:
-                    pastRight += 1
-            if col[i] != col[i - 1]:
-                breaks += 1
+    # width = len(pixels[0]) - (firstLeft * 2)
+    # print (len(pixels[0]))
+    # firstTop = None
+    # pastRight = 0
+    # for j in range(len(pixels[0])):
+    #     col = [p[j] for p in pixels]
+    #     for i in range(1, len(col)):
+    #         if col[j] != 0:
+    #             nonzero += 1
+    #             if not firstTop or i < firstTop:
+    #                 firstTop = i
+    #             if i <= (len(pixels[0]) + 1) / 2:
+    #                 pastRight += 1
+    #         if col[i] != col[i - 1]:
+    #             breaks += 1
 
-    height = len(pixels) - (firstTop * 2)
-    aspectRatio = float(width) / height
-    for n in range(5):
-        features[n] = breaks > 175 and 1.0 or 0.0
+    # height = len(pixels) - (firstTop * 2)
+    # aspectRatio = float(width) / height
+    # for n in range(5):
+    #     features[n] = breaks > 175 and 1.0 or 0.0
 
-    for n in range(10):
-        features[(n + 1) * 10] = aspectRatio < 0.69
+    # for n in range(10):
+    #     features[(n + 1) * 10] = aspectRatio < 0.69
 
-    for n in range(5):
-        features[-n] = nonzero > 300 and 1.0 or 0.0
+    # for n in range(5):
+    #     features[-n] = nonzero > 300 and 1.0 or 0.0
 
-    percentAbove = float(aboveCenter) / nonzero
-    for n in range(5):
-        features[-(n + 1) * 10] = percentAbove > 0.35 and 1.0 or 0.0
+    # percentAbove = float(aboveCenter) / nonzero
+    # for n in range(5):
+    #     features[-(n + 1) * 10] = percentAbove > 0.35 and 1.0 or 0.0
 
-    percentRight = float(pastRight) / nonzero
-    for n in range(1000, 1005):
-        features[n] = percentRight < 0.27 and 1.0 or 0.0
+    # percentRight = float(pastRight) / nonzero
+    # for n in range(1000, 1005):
+    #     features[n] = percentRight < 0.27 and 1.0 or 0.0
 
-    return features
+    # return features
 
 
 def basicFeatureExtractorPacman(state):
@@ -192,13 +193,6 @@ def enhancedPacmanFeatures(state, action):
         ghost.getPosition(), pacmanPosition)) for ghost in ghostStates])
     features["ghost_count"] = sum([(util.manhattanDistance(
         ghost.getPosition(), pacmanPosition) < 3) for ghost in ghostStates])
-
-    # if len(capsules) > 0:
-    #     features['capsules'] = min([util.manhattanDistance(capsule, pacmanPosition) for capsule in capsules] <
-    #                                min([util.manhattanDistance(capsule, pacmanPosition)
-    #                                     for capsule in currentCapsules])
-    #                             )
-
     features['scare_times'] = sum(
         [(ghost.scaredTimer == 0) for ghost in ghostStates])
     return features
